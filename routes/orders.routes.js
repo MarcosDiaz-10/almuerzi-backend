@@ -5,14 +5,12 @@ import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { getOrder, orderPost, getOrdersById, ordersPut, ordersDelete } from '../controllers/orders.controller.js'
 import { ordersValidator, usersValidator,mealsValidator } from '../helpers/db-validator.js'
+import { validarFecha } from '../middlewares/validar-fecha.js';
 
 const router = Router();
 
 
-router.get( '/',[
-    check( 'date', 'Se necesita una fecha').isDate({ format: 'dd-mm-yyyy'}),
-    validarCampos
-] ,getOrder );
+router.get( '/', validarFecha,getOrder );
 
 router.get('/:id', [
 

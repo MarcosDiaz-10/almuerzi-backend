@@ -2,10 +2,8 @@ import Order from '../models/Orders.model.js';
 
 export const getOrder = async( req, res ) => {
 
-
-
     const { limit = 5, from = 0 } = req.query;
-    const date = req.header('date');
+    const date = req.dateUser;
 
 
     try {
