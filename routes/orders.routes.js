@@ -38,7 +38,7 @@ router.post('/', [
 router.put('/:id', [ 
     check( 'id', 'No es un mongo id valido' ).isMongoId(),
     check( 'id' ).custom( ordersValidator ),
-    check( 'date', 'Se necesita una fecha de actualizacion de la orden' ).isDate( { format: 'dd-mm-yyyy'}),
+    check( 'date', 'Se necesita una fecha de actualizacion de la orden' ).isDate( { format: 'dd-m-yyyy'}),
     validarCampos
 ], ordersPut )
 

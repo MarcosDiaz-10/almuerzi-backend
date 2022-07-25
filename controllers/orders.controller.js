@@ -13,7 +13,7 @@ export const getOrder = async( req, res ) => {
         const [ total, orders ] = await Promise.all( [
     
             Order.countDocuments( { condition: true, date }),
-            Order.find( { condition: true, date }) .limit( Number( limit )) .skip( Number( from ) )
+            Order.find( { condition: true, date }) .limit( Number( limit )) .skip( Number( from ).populate('meal_id', 'nombre').populate('user_id', 'nombre') )
     
 
         ]);

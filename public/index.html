@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Hola gente</h1>
+
+    <button id="enviar" type="submit"> toca aqui</button>
+
+    <script>
+    
+    const enviar = document.querySelector('#enviar')
+
+
+
+    const formData = {
+        meal_id: '61ec8576596fa5b00d948197',
+        usuario: 'jshdfsdfjlsdjfdsjf',
+        date: new Date().toLocaleDateString()
+    }
+    
+
+    enviar.addEventListener( 'submit ', ev => {  
+
+        ev.preventDefault();
+
+    
+        fetch('http://localhost:8080/api/orders', {
+            method: 'POST',
+            body: JSON.stringify( formData ),
+            headers: { 'Content-Type': 'application/json' }
+        } )
+        .then( resp => console.log(resp.json()) )
+        .catch( err => console.log( err ))
+        
+        
+    })
+    
+    </script>
+
+</body>
+</html>
