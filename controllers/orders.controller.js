@@ -13,7 +13,10 @@ export const getOrder = async( req, res ) => {
         const [ total, orders ] = await Promise.all( [
     
             Order.countDocuments( { condition: true, date }),
-            Order.find( { condition: true, date }) .limit( Number( limit )) .skip( Number( from ).populate('meal_id', 'nombre').populate('user_id', 'nombre') )
+            Order.find( { condition: true, date }) .limit( Number( limit ))
+            .skip( Number( from ) )
+            .populate( 'meal_id', 'name')
+            .populate( 'user_id', 'name')
     
 
         ]);
@@ -23,7 +26,7 @@ export const getOrder = async( req, res ) => {
     } catch (error) {
         
 
-        res.status(500).json( { msg: 'Hable con el administrador', error })
+        res.status(500).json( { msg: 'Hable con el admistrador',error })
 
     }
 
