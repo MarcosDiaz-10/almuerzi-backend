@@ -2,7 +2,7 @@
 
 export const validarFecha = (req, res, next) => {
 
-    const date = req.header('date');
+    const date = req.header('x-date');
 
     if ( !date ){
         return res.status(400).json( { msg: 'no hay fecha en la peticion'});

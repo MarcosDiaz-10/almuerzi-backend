@@ -10,7 +10,7 @@ import { validarFecha } from '../middlewares/validar-fecha.js';
 const router = Router();
 
 
-router.get( '/', validarFecha,getOrder );
+router.get( '/', validarFecha, getOrder );
 
 router.get('/:id', [
 
