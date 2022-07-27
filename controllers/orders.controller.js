@@ -75,8 +75,8 @@ export const orderPost = async( req, res ) => {
 
      try {
          
-
-        await order.save()
+        
+        await (await (await order.save()).populate('meal_id', 'name')).populate('user_id', 'name')
 
         res.status(201).json( order )
 
@@ -125,6 +125,8 @@ export const ordersPut = async( req, res ) => {
 export const ordersDelete = async( req, res ) => {
 
     const { id } = req.params;
+
+    
 
 
     try {
