@@ -39,7 +39,7 @@ export const renovarJWT = async( req, res) => {
 
   const token = await generarJwt( usuarioToken.id );
 
-  const { password, ...usuario} = usuarioToken;
+  const usuario = { uid : usuarioToken.id, name: usuarioToken.name, mail: usuarioToken.mail}
 
   res.json({
     usuario,
