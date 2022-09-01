@@ -6,6 +6,7 @@ import { connectDb} from "../DB/config.js";
 import userRoutes from "../routes/users.routes.js";
 import orderRoutes from "../routes/orders.routes.js";
 import mealsRoutes from "../routes/meals.routes.js";
+import authRoutes from "../routes/auth.routes.js"
 
 
 class Server {
@@ -17,7 +18,8 @@ class Server {
         this.paths = {
             users: '/api/users',
             meals: '/api/meals',
-            orders: '/api/orders'
+            orders: '/api/orders',
+            auth: '/api/auth'
         }
 
         //Middlewares
@@ -57,6 +59,7 @@ class Server {
         this.app.use( this.paths.users, userRoutes )
         this.app.use( this.paths.meals, mealsRoutes )
         this.app.use( this.paths.orders, orderRoutes )
+        this.app.use( this.paths.auth, authRoutes )
     }
 
     listen(){

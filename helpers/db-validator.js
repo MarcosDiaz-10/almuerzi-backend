@@ -2,7 +2,7 @@
 import Meal from '../models/Meals.model.js';
 import Order from '../models/Orders.model.js';
 import User from '../models/Users.model.js';
-
+import Rol from '../models/Rol.model.js'
 
 
 export const mealsValidator = async( id = '') => { 
@@ -45,5 +45,12 @@ export const usersValidator = async( id = '' ) => {
 
 }
 
+export const rolValidator = async( rol = '') => { 
+    const existeRol = await Rol.findOne( { rol }); 
 
+    if ( !existeRol ){
+        throw new Error( 'No es un rol valido')
+    }
+
+}
 

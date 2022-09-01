@@ -10,6 +10,8 @@ const usuarioSchema = Schema({
     password: { type: String, required: [ true, 'La contraseña es necesario'] },
     
     img: { type: String },
+    
+    rol: { type: String},
 
     condition: { type: Boolean, default: true }, 
 

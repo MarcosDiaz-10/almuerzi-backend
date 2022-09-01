@@ -58,9 +58,9 @@ export const userGetById = async( req, res ) => {
 
 export const usersPost = async( req, res ) => { 
 
-    const { name, mail, password} = req.body;
+    const { name, mail, password, rol} = req.body;
 
-    const  user = new User({ name, mail, password });
+    const  user = new User({ name, mail, password, rol });
 
     
     try {
@@ -126,6 +126,24 @@ export const usersPutMail = async( req, res ) => {
     }
 }
 
+export const usersPutRol = async( req, res ) => { 
+
+    const { id } = req.params;
+    
+    const { rol } = req.body;
+
+    const data = { rol }    
+    
+    try {
+      
+        const user = await User.findByIdAndUpdate( id, data, { new: true } )
+
+        res.status( 200 ).json( user )
+
+    } catch (error) {
+       res.status( 500 ).json( { msg: 'Hable con el admistrador o intentelo más tarde', error}) 
+    }
+}
         
 export const usersPutPassword = async( req, res ) => { 
 
