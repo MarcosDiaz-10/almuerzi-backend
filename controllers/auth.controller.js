@@ -33,3 +33,14 @@ export const login = async( req, res) => {
         })
     }
 }
+
+export const renovarJWT = async( req, res) => {
+  const { usuarioAutenticado : usuario } = req;
+
+  const token = await generarJwt( usuario.id );
+
+  res.json({
+    usuario,
+    token
+  })
+}
