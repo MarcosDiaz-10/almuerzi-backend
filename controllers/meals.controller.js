@@ -12,8 +12,9 @@ export const mealsGet = async( req, res) => {
             Meal.find( {condition: true } )   .skip( Number( from ) ) .limit( Number( limit ) )
     
         ]) 
-    
-        res.status( 200 ).json({ total, meals });
+        
+        
+        res.status( 200 ).json({ ok: true, total, meals });
 
    
 
@@ -49,9 +50,9 @@ export const mealsPost = async( req, res ) => {
 
     try {
         
-        const { name, desc } = req.body;
+        const { name, desc, img } = req.body;
     
-        const meal = new Meal( { name, desc });
+        const meal = new Meal( { name, desc, img });
     
         await meal.save();
     

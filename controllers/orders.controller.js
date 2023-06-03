@@ -3,7 +3,7 @@ import Order from '../models/Orders.model.js';
 export const getOrder = async( req, res ) => {
 
     const { limit = 5, from = 0 } = req.query;
-    const date = req.dateUser;
+    const date = req.formattedDate;
 
 
     try {
@@ -60,14 +60,16 @@ export const getOrdersById = async( req, res ) => {
 
 export const orderPost = async( req, res ) => {
 
+    
+    const { usuarioAuth, formattedDate } = req;
+    const { meals_id } = req.body;
 
-    const { meal_id, user_id, date } = req.body;
 
     const data = { 
 
-        meal_id,
-        user_id,
-        date
+        meals_id,
+        user_id: usuarioAuth._id,
+        date: formattedDate
 
      };
 
@@ -76,7 +78,7 @@ export const orderPost = async( req, res ) => {
      try {
          
         
-        await (await (await order.save()).populate('meal_id', 'name')).populate('user_id', 'name')
+        await (await (await order.save()).populate('meals_id', 'name')).populate('user_id', 'name')
 
         res.status(201).json( order )
 
@@ -87,21 +89,22 @@ export const orderPost = async( req, res ) => {
 
 export const ordersPut = async( req, res ) => {
 
-    const { meal_id, date } = req.body;
+    const { formattedDate} = req;
+    const { meal_id,condition } = req.body;
 
     const {id} = req.params;
 
     let order = '';
 
-    let data = {};
+    let data = { condition };
 
     try {
         
         if( !meal_id ){
 
-            data.date = date
+            data.date = formattedDate
     
-            order = await Order.findByIdAndUpdate( id , data , { new: true }).populate('meal_id', ['name', 'availability'])
+            order = await Order.findByIdAndUpdate( id , data , { new: true }).populate('meals_id', ['name', 'availability'])
     
             return res.status( 200 ).json( order )
     

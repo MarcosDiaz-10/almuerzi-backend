@@ -14,7 +14,7 @@ class Server {
     constructor() {
 
         this.app = express();
-        this.port = process.env.PORT || 8080 ; 
+        this.port = process.env.PORT ?? 0; 
         this.paths = {
             users: '/api/users',
             meals: '/api/meals',
@@ -64,9 +64,9 @@ class Server {
 
     listen(){
 
-        this.app.listen( this.port , () => {
+        this.app.listen( this.port , function () {
             console.clear()
-            console.log( `Servidor Corriendo en el puerto ${ this.port }`)
+            console.log( `Servidor Corriendo en el puerto  http://localhost:${ this.address().port }`)
         })
 
     }

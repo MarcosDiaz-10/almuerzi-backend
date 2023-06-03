@@ -4,7 +4,7 @@ const { Schema, model } = pkg;
 
 const orderSchema = Schema( {
 
-    meal_id: { type: Schema.Types.ObjectId, ref: 'Meal', required: true },
+    meals_id: [{ type: Schema.Types.ObjectId, ref: 'Meal', required: true }],
 
     user_id: {type: Schema.Types.ObjectId, ref: 'User', required: true },
 

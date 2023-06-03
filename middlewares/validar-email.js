@@ -2,7 +2,7 @@ import User from '../models/Users.model.js'
 
 export const mailValidator = async( req, res, next ) => { 
 
-    const mail = req.body.mail.toUpperCase();
+    const mail = req.body.mail?.toUpperCase();
 
     const existeMail = await User.findOne( {mail} );
 

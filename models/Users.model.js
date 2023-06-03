@@ -9,7 +9,7 @@ const usuarioSchema = Schema({
 
     password: { type: String, required: [ true, 'La contraseña es necesario'] },
     
-    img: { type: String },
+    img: { type: String, default: ''},
     
     rol: { type: String},
 
@@ -25,7 +25,7 @@ const usuarioSchema = Schema({
 
 usuarioSchema.methods.toJSON = function(){
 
-    const { condition, google, facebook, __v, ...user } = this.toObject();
+    const { condition, google, facebook, __v, password, ...user } = this.toObject();
 
     return user ;
 

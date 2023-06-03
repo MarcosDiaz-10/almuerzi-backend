@@ -2,6 +2,7 @@ import bcryptjs from 'bcryptjs';
 
 
 import User from '../models/Users.model.js';
+import { generarJwt } from '../helpers/generar-jwt.js';
 
 
 export const usersGet = async( req, res ) => {
@@ -60,8 +61,10 @@ export const usersPost = async( req, res ) => {
 
     const { name, mail, password, rol} = req.body;
 
+
     const  user = new User({ name, mail, password, rol });
 
+    
     
     try {
         
@@ -71,15 +74,20 @@ export const usersPost = async( req, res ) => {
         user.password = bcryptjs.hashSync( password, salt);
     
         await user.save()
+
+        const token = await generarJwt( user.id );
     
-        res.status( 200 ).json(
-            user
+        res.status( 200 ).json({
+            ok: true,
+            user,
+            token
+        }  
         )
 
         
     } catch (error) {
         
-        res.status( 500 ).json( { msg: ' Hable con el admistrador o intentelo mas tarde'})
+        res.status( 500 ).json( { ok: false, msg: ' Hable con el admistrador o intentelo mas tarde'})
 
     }
 

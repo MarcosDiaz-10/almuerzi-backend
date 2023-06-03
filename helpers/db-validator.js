@@ -5,13 +5,16 @@ import User from '../models/Users.model.js';
 import Rol from '../models/Rol.model.js'
 
 
-export const mealsValidator = async( id = '') => { 
+export const mealsValidator = async( mealsId ) => { 
 
     
 
-    const existeMeal = await Meal.findById( id, { condition: true });
+    const existeMeal = await Promise.all( mealsId.map(async (meal) => {
+        return await Meal.findById( meal, { condition: true })
+    })) ;
 
-    if( !existeMeal ){
+
+    if( existeMeal.includes(undefined)){
 
         throw new Error(`El plato que busca no se encuentra disponible`)
 

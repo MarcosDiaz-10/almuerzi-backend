@@ -10,6 +10,7 @@ import { tieneRol } from '../middlewares/validar-roles.js';
 
 const router = Router();
 
+router.use( validarJwt );
 
 router.get('/', mealsGet );
 
@@ -23,8 +24,7 @@ router.get('/:id', [
 
 
 router.post('/',[
-    validarJwt,
-    tieneRol('ADMIN'), 
+    tieneRol('ADMIN_ROL'), 
     check('name', 'Es necesario ingresar un nombre').notEmpty(),
     validarNombreMeal,
     check('desc', 'Es necesaria una descripción').notEmpty(),
@@ -34,8 +34,7 @@ router.post('/',[
 
 
 router.put( '/putMealsName/:id', [
-    validarJwt,
-    tieneRol('ADMIN'),   
+    tieneRol('ADMIN_ROL'),   
     check('id', 'Es necesario un mongoId valido').isMongoId(),
     check('id').custom( mealsValidator ),
     check('name', 'El nombre es obligatorio').not().isEmpty(),
@@ -44,8 +43,7 @@ router.put( '/putMealsName/:id', [
 ], mealsPutName )
 
 router.put( '/putMealsDesc/:id', [
-    validarJwt,
-    tieneRol('ADMIN'),   
+    tieneRol('ADMIN_ROL'),   
     check('id', 'Es necesario un mongoId valido').isMongoId(),
     check('id').custom( mealsValidator ),
     check('desc', 'Es necesaria una descripción').notEmpty(),
@@ -54,16 +52,14 @@ router.put( '/putMealsDesc/:id', [
 ], mealsPutDesc )
 
 router.put( '/putMealsAvailability/:id', [
-    validarJwt,
-    tieneRol('ADMIN'),   
+    tieneRol('ADMIN_ROL'),   
     check('id', 'Es necesario un mongoId valido').isMongoId(),
     check('id').custom( mealsValidator ),
     validarCampos
 ], mealsPutAvailability )
 
 router.delete('/:id', [
-    validarJwt,
-    tieneRol('ADMIN'),   
+    tieneRol('ADMIN_ROL'),   
     check('id', 'Es necesario un mongoId valido').isMongoId(),
     check('id').custom( mealsValidator ),
     validarCampos

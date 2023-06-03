@@ -19,30 +19,43 @@ export const login = async( req, res) => {
        const validarPassword = bcryptjs.compareSync( password, user.password);
      
        if( !validarPassword ) {
-         return res.status( 400 ).json({ msg: 'El correo o la contraseña son incorrectos - password'})
+         return res.status( 400 ).json({ ok: false, msg: 'El correo o la contraseña son incorrectos - password'})
        }
        
        const token = await generarJwt( user.id );
         
-       res.json({user, token});
+       res.json({ok: true, user, token});
         
     } catch (error) {
         console.log(error)
         return res.status(500).json({
+            ok: false,
             msg: "Hable con el administrador"
         })
     }
 }
 
 export const renovarJWT = async( req, res) => {
-  const { usuarioAuth : usuarioToken } = req;
 
-  const token = await generarJwt( usuarioToken.id );
+  try {
+    
+    const { usuarioAuth : usuarioToken } = req;
 
-  const usuario = { uid : usuarioToken.id, name: usuarioToken.name, mail: usuarioToken.mail}
+    const token = await generarJwt( usuarioToken.id );
+    
+    const user = { uid : usuarioToken.id, name: usuarioToken.name, mail: usuarioToken.mail, img: usuarioToken.img, rol: usuarioToken.rol }
+  
+    res.json({
+      ok: true,
+      user,
+      token
+    });
 
-  res.json({
-    usuario,
-    token
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      ok: false,
+      msg: "Hable con el administrador"
   })
+  }
 }
