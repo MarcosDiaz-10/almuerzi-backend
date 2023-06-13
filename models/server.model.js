@@ -9,6 +9,10 @@ import mealsRoutes from "../routes/meals.routes.js";
 import authRoutes from "../routes/auth.routes.js"
 
 
+const {pathname: root} = new URL('../', import.meta.url)
+const __dirname = root.replace( /%20/g,' ').replace(/\\/g,'/').replace(/c:/g,'').replace('/', '')
+
+
 class Server {
 
     constructor() {
@@ -51,15 +55,23 @@ class Server {
 
         this.app.use( express.static( 'public' ))
 
+        
+
 
     }
 
     routes(){
+       
 
         this.app.use( this.paths.users, userRoutes )
         this.app.use( this.paths.meals, mealsRoutes )
         this.app.use( this.paths.orders, orderRoutes )
         this.app.use( this.paths.auth, authRoutes )
+        this.app.get('*', (req, res) => {
+
+            res.sendFile( __dirname + 'public/index.html')
+        })
+
     }
 
     listen(){

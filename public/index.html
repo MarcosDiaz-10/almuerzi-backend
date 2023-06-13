@@ -1,46 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
-<body>
-    <h1>Hola gente</h1>
-
-    <button id="enviar" type="submit"> toca aqui</button>
-
-    <script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almuerzi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script type="module" crossorigin src="/assets/index-b0fd6bda.js"></script>
+    <link rel="stylesheet" href="/assets/index-f1a3c791.css">
+  </head>
+  <body>
+    <div id="root"> <h1>Cargando...</h1></div>
     
-    const enviar = document.querySelector('#enviar')
-
-
-
-    const formData = {
-        meal_id: '61ec8576596fa5b00d948197',
-        usuario: 'jshdfsdfjlsdjfdsjf',
-        date: new Date().toLocaleDateString()
-    }
-    
-
-    enviar.addEventListener( 'submit ', ev => {  
-
-        ev.preventDefault();
-
-    
-        fetch('http://localhost:8080/api/orders', {
-            method: 'POST',
-            body: JSON.stringify( formData ),
-            headers: { 'Content-Type': 'application/json' }
-        } )
-        .then( resp => console.log(resp.json()) )
-        .catch( err => console.log( err ))
-        
-        
-    })
-    
-    </script>
-
-</body>
+  </body>
 </html>
