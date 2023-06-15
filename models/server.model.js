@@ -68,7 +68,7 @@ class Server {
         this.app.use( this.paths.orders, orderRoutes )
         this.app.use( this.paths.auth, authRoutes )
         this.app.get('*', (req, res) => {
-
+            console.log( __dirname + './public/index.html')
             res.sendFile( __dirname + './public/index.html')
         })
 
