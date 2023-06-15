@@ -69,7 +69,7 @@ class Server {
         this.app.use( this.paths.auth, authRoutes )
         this.app.get('*', (req, res) => {
 
-            res.sendFile( __dirname + 'public/index.html')
+            res.sendFile( __dirname + './public/index.html')
         })
 
     }
